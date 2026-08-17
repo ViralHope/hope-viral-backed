@@ -64,7 +64,11 @@ async def analyze_video(file: UploadFile = File(...)):
         # Sprzątanie
         if os.path.exists(temp_path):
             os.remove(temp_path)
+import os
+import uvicorn
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    # Render automatycznie przypisze port do zmiennej środowiskowej PORT
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
+
